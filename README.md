@@ -34,3 +34,7 @@ Models are evaluated using:
    ```
 
 The script prints RMSE and R² for each model.
+
+## Results
+Linear Regression: RMSE = 35,251.39, R² = 0.845
+Random Forest:     RMSE = 27,288.85, R² = 0.907
