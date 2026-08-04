@@ -10,8 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 
 def load_data():
-    # Use your exact local file path
-    data_path = r"C:/Users/ooyet/OneDrive/Documents/house-price-regression/data/AmesHousing.csv"
+    data_path = "data/AmesHousing.csv"
     df = pd.read_csv(data_path)
     return df
 
@@ -48,7 +47,7 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
     lin_reg = LinearRegression()
     lin_reg.fit(X_train, y_train)
     y_pred_lin = lin_reg.predict(X_test)
-    rmse_lin = mean_squared_error(y_test, y_pred_lin, squared=False)
+    rmse_lin = mean_squared_error(y_test, y_pred_lin) ** 0.5
     r2_lin = r2_score(y_test, y_pred_lin)
     results["Linear Regression"] = {"RMSE": rmse_lin, "R2": r2_lin}
 
@@ -59,12 +58,11 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
     )
     rf.fit(X_train, y_train)
     y_pred_rf = rf.predict(X_test)
-    rmse_rf = mean_squared_error(y_test, y_pred_rf, squared=False)
+    rmse_rf = mean_squared_error(y_test, y_pred_rf) ** 0.5
     r2_rf = r2_score(y_test, y_pred_rf)
     results["Random Forest"] = {"RMSE": rmse_rf, "R2": r2_rf}
 
     return results
-
 
 def main():
     print("Loading data...")
@@ -77,15 +75,11 @@ def main():
     X_train, X_test, y_train, y_test = encode_and_split(df)
 
     print("Training and evaluating models...")
-    results = train_and_evaluate_models(X_train, Y_test, y_train, y_test)
+    results = train_and_evaluate_models(X_train, X_test, y_train, y_test)
 
     print("\nModel performance:")
     for name, metrics in results.items():
         print(f"{name}: RMSE = {metrics['RMSE']:.2f}, R2 = {metrics['R2']:.3f}")
-
-
-if __name__ == "__main__":
-    main()
 
 if __name__ == "__main__":
     main()
