@@ -16,7 +16,6 @@ def load_data():
 
 
 def clean_data(df):
-    # Drop ID-like columns if present
     df = df.drop(columns=["PID"], errors="ignore")
 
     num_cols = df.select_dtypes(include=["int64", "float64"]).columns
@@ -64,6 +63,7 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
 
     return results
 
+
 def main():
     print("Loading data...")
     df = load_data()
@@ -80,6 +80,7 @@ def main():
     print("\nModel performance:")
     for name, metrics in results.items():
         print(f"{name}: RMSE = {metrics['RMSE']:.2f}, R2 = {metrics['R2']:.3f}")
+
 
 if __name__ == "__main__":
     main()
